@@ -1,0 +1,38 @@
+{
+  "name": "testrail-js-api",
+  "version": "0.1.0",
+  "description": "Library exposing TestRail API",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "engines": {
+    "node": ">=10.9"
+  },
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DamianOsipiuk/testrail-api.git"
+  },
+  "keywords": [
+    "testrail",
+    "api"
+  ],
+  "author": "Damian Osipiuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DamianOsipiuk/testrail-api/issues"
+  },
+  "homepage": "https://github.com/DamianOsipiuk/testrail-api#readme",
+  "dependencies": {
+    "form-data": "^3.0.0",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.6",
+    "@types/node-fetch": "^2.5.5",
+    "typescript": "^3.8.2"
+  }
+}
