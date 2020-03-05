@@ -255,7 +255,7 @@ export interface AddPlanEntry {
   include_all?: boolean;
   case_ids?: number[];
   config_ids?: number[];
-  runs: {
+  runs?: {
     name?: string;
     description?: string;
     assignedto_id?: number;
@@ -443,7 +443,7 @@ export interface Run {
 
 export interface AddRun {
   suite_id?: number;
-  name?: string;
+  name: string;
   description?: string;
   milestone_id?: number;
   assignedto_id?: number;
