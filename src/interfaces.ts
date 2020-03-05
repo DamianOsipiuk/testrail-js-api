@@ -248,7 +248,7 @@ export interface PlanEntry {
 }
 
 export interface AddPlanEntry {
-  suite_id: string;
+  suite_id: number;
   name: string;
   description?: string;
   assignedto_id?: number;
