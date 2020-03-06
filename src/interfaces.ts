@@ -452,7 +452,7 @@ export interface AddRun {
   refs?: string;
 }
 
-export type UpdateRun = Omit<AddRun, "suite_id" | "assignedto_id">;
+export type UpdateRun = Partial<Omit<AddRun, "suite_id" | "assignedto_id">>;
 //#endregion
 
 //#region Sections
