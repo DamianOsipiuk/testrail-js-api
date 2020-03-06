@@ -143,6 +143,7 @@ export class TestRail {
       formData,
       {
         headers: {},
+        requestType: ResponseType.Blob,
       }
     );
   };
@@ -268,7 +269,7 @@ export class TestRail {
   getMilestones = (
     project_id: number,
     filters?: {
-      is_completed?: boolean;
+      is_completed?: 0 | 1;
       is_started?: boolean;
     }
   ) => {
@@ -301,13 +302,13 @@ export class TestRail {
   getPlans = (
     project_id: number,
     filters?: {
-      created_after: number;
-      created_before: number;
-      created_by: number[];
-      is_completed: boolean;
-      limit: number;
-      offset: number;
-      milestone_id: number[];
+      created_after?: number;
+      created_before?: number;
+      created_by?: number[];
+      is_completed?: 0 | 1;
+      limit?: number;
+      offset?: number;
+      milestone_id?: number[];
     }
   ) => {
     return this.apiGet<Plan[]>("get_plans/" + project_id, {
@@ -393,9 +394,9 @@ export class TestRail {
   getResults = (
     test_id: number,
     filters?: {
-      limit: number;
-      offset: number;
-      status_id: number[];
+      limit?: number;
+      offset?: number;
+      status_id?: number[];
     }
   ) => {
     return this.apiGet<Result[]>("get_results/" + test_id, {
@@ -421,12 +422,12 @@ export class TestRail {
   getResultsForRun = (
     run_id: number,
     filters?: {
-      created_after: number;
-      created_before: number;
-      created_by: number[];
-      limit: number;
-      offset: number;
-      status_id: number[];
+      created_after?: number;
+      created_before?: number;
+      created_by?: number[];
+      limit?: number;
+      offset?: number;
+      status_id?: number[];
     }
   ) => {
     return this.apiGet<Result[]>("get_results_for_run/" + run_id, {
@@ -470,14 +471,14 @@ export class TestRail {
   getRuns = (
     project_id: number,
     filters?: {
-      created_after: number;
-      created_before: number;
-      created_by: number[];
-      is_completed: boolean;
-      limit: number;
-      offset: number;
-      milestone_id: number[];
-      suite_id: number[];
+      created_after?: number;
+      created_before?: number;
+      created_by?: number[];
+      is_completed?: 0 | 1;
+      limit?: number;
+      offset?: number;
+      milestone_id?: number[];
+      suite_id?: number[];
     }
   ) => {
     return this.apiGet<Run[]>("get_runs/" + project_id, {
