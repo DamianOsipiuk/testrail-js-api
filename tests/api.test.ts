@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
-import { TestRail } from "./api";
-import { HttpMethod, ResponseType } from "./interfaces";
+import { TestRail } from "../src/api";
+import { HttpMethod, ResponseType } from "../src/interfaces";
 
 jest.mock("node-fetch", () => jest.fn());
 const { Response } = jest.requireActual("node-fetch");
