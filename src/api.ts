@@ -56,9 +56,20 @@ export class TestRail {
   baseUrl: string;
   authHeader: string;
 
-  constructor(host: string, user: string, apiKey: string) {
+  /**
+   * @param host Hostname of the TestRail server
+   * @param user Username used for TestRail connection
+   * @param apiKey Generated API key for the user
+   * @param baseUrl Base url of the API
+   */
+  constructor(
+    host: string,
+    user: string,
+    apiKey: string,
+    baseUrl: string = "/index.php?/api/v2/"
+  ) {
     this.host = host;
-    this.baseUrl = "/index.php?/api/v2/";
+    this.baseUrl = baseUrl;
     this.authHeader =
       "Basic " + Buffer.from(user + ":" + apiKey).toString("base64");
   }
@@ -86,18 +97,24 @@ export class TestRail {
     let url = this.host + this.baseUrl + apiUrl;
 
     if (options?.queryVariables) {
-      url += "&" + qs.stringify(options.queryVariables);
+      url += "?" + qs.stringify(options.queryVariables);
     }
 
-    const headers: any = options?.headers
-      ? {
-          ...options.headers,
-          Authorization: this.authHeader,
-        }
-      : {
-          "Content-Type": "application/json",
-          Authorization: this.authHeader,
-        };
+    let headers: any = {
+      Authorization: this.authHeader,
+    };
+
+    if (options?.headers) {
+      headers = {
+        ...headers,
+        ...options.headers,
+      };
+    } else if (options?.requestType !== ResponseType.Blob) {
+      headers = {
+        ...headers,
+        "Content-Type": "application/json",
+      };
+    }
 
     const response = await fetch(url, {
       method,
