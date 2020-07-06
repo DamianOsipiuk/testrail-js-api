@@ -121,7 +121,7 @@ describe("API Core", () => {
 
       expect(mockFetch).toBeCalledTimes(1);
       expect(mockFetch).toBeCalledWith(
-        `${host}${baseUrl}${url}?q1=val1&q2=val2`,
+        `${host}${baseUrl}${url}&q1=val1&q2=val2`,
         {
           body: undefined,
           headers: {

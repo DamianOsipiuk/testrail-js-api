@@ -97,7 +97,7 @@ export class TestRail {
     let url = this.host + this.baseUrl + apiUrl;
 
     if (options?.queryVariables) {
-      url += "?" + qs.stringify(options.queryVariables);
+      url += "&" + qs.stringify(options.queryVariables);
     }
 
     let headers: any = {
