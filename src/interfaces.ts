@@ -87,6 +87,25 @@ export interface Case {
   updated_on: number;
 }
 
+export interface CaseChange {
+  type_id: number;
+  old_text: string;
+  new_text: string;
+  label: string;
+  options: any[];
+  field: string;
+  old_value: any;
+  new_value: any;
+}
+
+export interface CaseHistory {
+  id: number;
+  created_on: number;
+  type_id: number;
+  user_id: number;
+  changes: CaseChange[];
+}
+
 export interface CaseStep {
   content: string;
   expected: string;
@@ -188,6 +207,8 @@ export interface Milestone {
   name: string;
   parent_id: number;
   project_id: number;
+  // TestRail 6.4
+  refs: string;
   start_on: number;
   started_on: number;
   url: string;
@@ -198,6 +219,7 @@ export interface AddMilestone {
   description?: string;
   due_on?: number;
   parent_id?: number;
+  refs?: string;
   start_on?: number;
 }
 
@@ -223,6 +245,8 @@ export interface Plan {
   name: string;
   passed_count: number;
   project_id: number;
+  // TestRail 6.3
+  refs: string;
   retest_count: number;
   untested_count: number;
   url: string;
@@ -244,7 +268,19 @@ export interface PlanEntry {
   include_all?: boolean;
   case_ids?: number[];
   config_ids?: number[];
+  // TestRail 6.3
+  refs: string;
   runs: Run[];
+}
+
+export interface AddPlanEntryRun {
+  name?: string;
+  description?: string;
+  assignedto_id?: number;
+  include_all?: boolean;
+  case_ids?: number[];
+  config_ids?: number[];
+  refs?: string;
 }
 
 export interface AddPlanEntry {
@@ -255,14 +291,7 @@ export interface AddPlanEntry {
   include_all?: boolean;
   case_ids?: number[];
   config_ids?: number[];
-  runs?: {
-    name?: string;
-    description?: string;
-    assignedto_id?: number;
-    include_all?: boolean;
-    case_ids?: number[];
-    config_ids?: number[];
-  }[];
+  runs?: AddPlanEntryRun[];
 }
 
 export interface UpdatePlanEntry {
@@ -271,6 +300,8 @@ export interface UpdatePlanEntry {
   assignedto_id?: number;
   include_all?: boolean;
   case_ids?: number[];
+  // TestRail 6.3
+  refs?: string;
 }
 //#endregion
 
@@ -545,5 +576,9 @@ export interface User {
   id: number;
   is_active: boolean;
   name: string;
+  // TestRail 6.4
+  role_id: number;
+  // TestRail 6.4
+  role: string;
 }
 //#endregion
