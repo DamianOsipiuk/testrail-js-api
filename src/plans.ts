@@ -78,14 +78,10 @@ export function updatePlanEntry(
  */
 export function updateRunInPlanEntry(
   this: TestRail,
-  plan_id: number,
   run_id: number,
   data: UpdatePlanEntry
 ) {
-  return this.apiPost<PlanEntry>(
-    "update_run_in_plan_entry/" + plan_id + "/" + run_id,
-    data
-  );
+  return this.apiPost<PlanEntry>("update_run_in_plan_entry/" + run_id, data);
 }
 
 /**

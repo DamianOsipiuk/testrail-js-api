@@ -414,6 +414,10 @@ export interface AddResult {
   [key: string]: any;
 }
 
+export interface AddMultipleResult extends AddResult {
+  test_id: number;
+}
+
 export interface AddResultForCase extends AddResult {
   case_id: number;
 }

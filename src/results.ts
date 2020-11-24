@@ -1,5 +1,10 @@
 import type { TestRail } from "./api";
-import type { Result, AddResult, AddResultForCase } from "./interfaces";
+import type {
+  Result,
+  AddResult,
+  AddResultForCase,
+  AddMultipleResult,
+} from "./interfaces";
 
 export function getResults(
   this: TestRail,
@@ -70,7 +75,7 @@ export function addResultForCase(
 export function addResults(
   this: TestRail,
   run_id: number,
-  results: AddResult[]
+  results: AddMultipleResult[]
 ) {
   return this.apiPost<Result[]>("add_results/" + run_id, {
     results,

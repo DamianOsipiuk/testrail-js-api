@@ -9,7 +9,7 @@ export function getSections(
   this: TestRail,
   project_id: number,
   filters?: {
-    suite_id: number;
+    suite_id?: number;
   }
 ) {
   return this.apiGet<Section[]>("get_sections/" + project_id, {
