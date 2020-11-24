@@ -101,11 +101,7 @@ import { getTemplates } from "./templates";
 import { getTest, getTests } from "./tests";
 import { getUser, getCurrentUser, getUserByEmail, getUsers } from "./users";
 
-import {
-  HttpMethod,
-  ResponseType,
-  RequestOptions,
-} from "./interfaces";
+import { HttpMethod, RequestType, RequestOptions } from "./interfaces";
 
 export class TestRail {
   host: string;
@@ -146,7 +142,7 @@ export class TestRail {
     value: T;
   }> => {
     let requestBody = body;
-    if (options?.requestType !== ResponseType.Blob) {
+    if (options?.requestType !== RequestType.Blob) {
       requestBody = JSON.stringify(body);
     }
 
@@ -165,7 +161,7 @@ export class TestRail {
         ...headers,
         ...options.headers,
       };
-    } else if (options?.requestType !== ResponseType.Blob) {
+    } else if (options?.requestType !== RequestType.Blob) {
       headers = {
         ...headers,
         "Content-Type": "application/json",
@@ -178,9 +174,19 @@ export class TestRail {
       headers,
     });
 
-    const value = await (options?.responseType === ResponseType.Blob
-      ? response.blob()
-      : response.json());
+    const contentType = response.headers.get("Content-Type");
+    const contentLength = Number(response.headers.get("Content-Length"));
+    let value;
+
+    if (contentLength > 0) {
+      if (contentType?.includes("application/json")) {
+        value = await response.json();
+      } else if (contentType?.includes("text/plain")) {
+        value = await response.text();
+      } else {
+        value = await response.blob();
+      }
+    }
 
     return {
       response,

@@ -20,6 +20,12 @@ export function updateSuite(this: TestRail, suite_id: number, data: AddSuite) {
 /**
  * Please Note: Deleting a test suite cannot be undone and also deletes all active test runs & results, i.e. test runs & results that weren’t closed (archived) yet.
  */
-export function deleteSuite(this: TestRail, suite_id: number) {
-  return this.apiPost("delete_suite/" + suite_id);
+export function deleteSuite(
+  this: TestRail,
+  suite_id: number,
+  queryVariables?: {
+    soft?: 0 | 1;
+  }
+) {
+  return this.apiPost("delete_suite/" + suite_id, undefined, { queryVariables });
 }

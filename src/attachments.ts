@@ -1,6 +1,6 @@
 import fs from "fs";
 import FormData from "form-data";
-import { ResponseType } from "./interfaces";
+import { RequestType } from "./interfaces";
 
 import type { TestRail } from "./api";
 import type { Attachment, AddAttachmentResult } from "./interfaces";
@@ -18,7 +18,7 @@ export function addAttachmentToPlan(
     formData,
     {
       headers: {},
-      requestType: ResponseType.Blob,
+      requestType: RequestType.Blob,
     }
   );
 }
@@ -37,7 +37,7 @@ export function addAttachmentToPlanEntry(
     formData,
     {
       headers: {},
-      requestType: ResponseType.Blob,
+      requestType: RequestType.Blob,
     }
   );
 }
@@ -58,7 +58,7 @@ export function addAttachmentToResult(
     formData,
     {
       headers: {},
-      requestType: ResponseType.Blob,
+      requestType: RequestType.Blob,
     }
   );
 }
@@ -90,9 +90,7 @@ export function get_attachments_for_test(this: TestRail, test_id: number) {
 }
 
 export function get_attachment(this: TestRail, attachment_id: number) {
-  return this.apiGet<Blob>("get_attachment/" + attachment_id, {
-    responseType: ResponseType.Blob,
-  });
+  return this.apiGet<Blob>("get_attachment/" + attachment_id);
 }
 
 export function delete_attachment(this: TestRail, attachment_id: number) {

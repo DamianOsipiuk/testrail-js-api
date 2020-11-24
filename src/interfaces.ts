@@ -5,14 +5,13 @@ export enum HttpMethod {
   Post = "POST",
 }
 
-export const enum ResponseType {
+export const enum RequestType {
   JSON = 1,
   Blob,
 }
 
 export interface RequestOptions {
-  requestType?: ResponseType;
-  responseType?: ResponseType;
+  requestType?: RequestType;
   headers?: { [key: string]: any };
   queryVariables?: ParsedUrlQueryInput;
 }
