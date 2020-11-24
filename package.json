@@ -1,6 +1,6 @@
 {
   "name": "testrail-js-api",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Library exposing TestRail API",
   "main": "lib/index.js",
   "files": [
@@ -31,14 +31,15 @@
   "homepage": "https://github.com/DamianOsipiuk/testrail-api#readme",
   "dependencies": {
     "form-data": "^3.0.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.4",
-    "@types/node": "^14.0.18",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.9",
     "@types/node-fetch": "^2.5.7",
-    "jest": "^26.1.0",
-    "ts-jest": "^26.1.1",
-    "typescript": "^3.9.6"
+    "jest": "^26.6.3",
+    "prettier": "^2.2.0",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.2"
   }
 }

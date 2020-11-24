@@ -2,7 +2,7 @@
 
 # Notice
 
-Please make sure to check the API reference: http://docs.gurock.com/testrail-api2/start
+Please make sure to check the API reference: https://www.gurock.com/testrail/docs/api
 
 To upload attachments for test results you have to enable an option to edit test reults:
 

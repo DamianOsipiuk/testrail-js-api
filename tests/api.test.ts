@@ -1,11 +1,14 @@
 import fetch from "node-fetch";
 
 import { TestRail } from "../src/api";
-import { HttpMethod, ResponseType } from "../src/interfaces";
+import { HttpMethod, RequestType } from "../src/interfaces";
 
 jest.mock("node-fetch", () => jest.fn());
 const { Response } = jest.requireActual("node-fetch");
 const mockFetch: jest.MockedFunction<typeof fetch> = fetch as any;
+
+const jsonType = "application/json";
+const defaultResponseHeaders = { "Content-Type": jsonType };
 
 describe("API Core", () => {
   const host = "host";
@@ -40,7 +43,9 @@ describe("API Core", () => {
       const responseValue = { x: "response" };
 
       mockFetch.mockResolvedValueOnce(
-        new Response(JSON.stringify(responseValue))
+        new Response(JSON.stringify(responseValue), {
+          headers: defaultResponseHeaders,
+        })
       );
       const { value } = await api.apiGet(url);
 
@@ -49,7 +54,7 @@ describe("API Core", () => {
         body: undefined,
         headers: {
           Authorization: authHeader,
-          "Content-Type": "application/json",
+          "Content-Type": jsonType,
         },
         method: HttpMethod.Get,
       });
@@ -61,7 +66,9 @@ describe("API Core", () => {
       const responseValue = { x: "response2" };
 
       mockFetch.mockResolvedValueOnce(
-        new Response(JSON.stringify(responseValue))
+        new Response(JSON.stringify(responseValue), {
+          headers: defaultResponseHeaders,
+        })
       );
       const { value } = await api.apiGet(url, {
         headers: {
@@ -86,7 +93,9 @@ describe("API Core", () => {
       const responseValue = { x: "response3" };
 
       mockFetch.mockResolvedValueOnce(
-        new Response(JSON.stringify(responseValue))
+        new Response(JSON.stringify(responseValue), {
+          headers: defaultResponseHeaders,
+        })
       );
       const { value } = await api.apiGet(url, {
         headers: {
@@ -110,7 +119,9 @@ describe("API Core", () => {
       const responseValue = { x: "response4" };
 
       mockFetch.mockResolvedValueOnce(
-        new Response(JSON.stringify(responseValue))
+        new Response(JSON.stringify(responseValue), {
+          headers: defaultResponseHeaders,
+        })
       );
       const { value } = await api.apiGet(url, {
         queryVariables: {
@@ -126,7 +137,7 @@ describe("API Core", () => {
           body: undefined,
           headers: {
             Authorization: authHeader,
-            "Content-Type": "application/json",
+            "Content-Type": jsonType,
           },
           method: HttpMethod.Get,
         }
@@ -138,17 +149,19 @@ describe("API Core", () => {
       const url = "url5";
       const responseValue = new Blob(["a", "b", "c"]);
 
-      mockFetch.mockResolvedValueOnce(new Response(responseValue));
-      const { value } = await api.apiGet(url, {
-        responseType: ResponseType.Blob,
-      });
+      mockFetch.mockResolvedValueOnce(
+        new Response(responseValue, {
+          headers: { "Content-Type": "application/octet-stream" },
+        })
+      );
+      const { value } = await api.apiGet(url);
 
       expect(mockFetch).toBeCalledTimes(1);
       expect(mockFetch).toBeCalledWith(`${host}${baseUrl}${url}`, {
         body: undefined,
         headers: {
           Authorization: authHeader,
-          "Content-Type": "application/json",
+          "Content-Type": jsonType,
         },
         method: HttpMethod.Get,
       });
@@ -163,7 +176,9 @@ describe("API Core", () => {
       const responseValue = { x: "response11" };
 
       mockFetch.mockResolvedValueOnce(
-        new Response(JSON.stringify(responseValue))
+        new Response(JSON.stringify(responseValue), {
+          headers: defaultResponseHeaders,
+        })
       );
       const { value } = await api.apiPost(url, body);
 
@@ -172,7 +187,7 @@ describe("API Core", () => {
         body: JSON.stringify(body),
         headers: {
           Authorization: authHeader,
-          "Content-Type": "application/json",
+          "Content-Type": jsonType,
         },
         method: HttpMethod.Post,
       });
@@ -184,7 +199,9 @@ describe("API Core", () => {
       const responseValue = { x: "response12" };
 
       mockFetch.mockResolvedValueOnce(
-        new Response(JSON.stringify(responseValue))
+        new Response(JSON.stringify(responseValue), {
+          headers: defaultResponseHeaders,
+        })
       );
       const { value } = await api.apiPost(url);
 
@@ -193,7 +210,7 @@ describe("API Core", () => {
         body: undefined,
         headers: {
           Authorization: authHeader,
-          "Content-Type": "application/json",
+          "Content-Type": jsonType,
         },
         method: HttpMethod.Post,
       });
@@ -204,10 +221,13 @@ describe("API Core", () => {
       const url = "url13";
       const requestValue = new Blob(["a", "b", "c"]);
 
-      mockFetch.mockResolvedValueOnce(new Response(requestValue));
+      mockFetch.mockResolvedValueOnce(
+        new Response(requestValue, {
+          headers: { "Content-Type": "application/octet-stream" },
+        })
+      );
       const { value } = await api.apiPost(url, requestValue, {
-        requestType: ResponseType.Blob,
-        responseType: ResponseType.Blob,
+        requestType: RequestType.Blob,
       });
 
       expect(mockFetch).toBeCalledTimes(1);
