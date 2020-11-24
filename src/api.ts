@@ -175,10 +175,10 @@ export class TestRail {
     });
 
     const contentType = response.headers.get("Content-Type");
-    const contentLength = Number(response.headers.get("Content-Length"));
+    const contentLength = response.headers.get("Content-Length");
     let value;
 
-    if (contentLength > 0) {
+    if (!contentLength || Number(contentLength) > 0) {
       if (contentType?.includes("application/json")) {
         value = await response.json();
       } else if (contentType?.includes("text/plain")) {
