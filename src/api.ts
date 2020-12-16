@@ -118,7 +118,7 @@ export class TestRail {
     host: string,
     user: string,
     apiKey: string,
-    baseUrl: string = "/index.php?/api/v2/"
+    baseUrl = "/index.php?/api/v2/"
   ) {
     this.host = host;
     this.baseUrl = baseUrl;
@@ -135,7 +135,7 @@ export class TestRail {
   }: {
     method: HttpMethod;
     apiUrl: string;
-    body?: any;
+    body?: unknown;
     options?: RequestOptions;
   }): Promise<{
     response: Response;
@@ -152,7 +152,7 @@ export class TestRail {
       url += "&" + qs.stringify(options.queryVariables);
     }
 
-    let headers: any = {
+    let headers: Record<string, string> = {
       Authorization: this.authHeader,
     };
 
@@ -170,7 +170,7 @@ export class TestRail {
 
     const response = await fetch(url, {
       method,
-      body: requestBody,
+      body: requestBody as never,
       headers,
     });
 
@@ -202,7 +202,7 @@ export class TestRail {
     });
   };
 
-  apiPost = <T>(apiUrl: string, body?: any, options?: RequestOptions) => {
+  apiPost = <T>(apiUrl: string, body?: unknown, options?: RequestOptions) => {
     return this._callAPI<T>({
       method: HttpMethod.Post,
       apiUrl,

@@ -5,7 +5,7 @@ import { HttpMethod, RequestType } from "../src/interfaces";
 
 jest.mock("node-fetch", () => jest.fn());
 const { Response } = jest.requireActual("node-fetch");
-const mockFetch: jest.MockedFunction<typeof fetch> = fetch as any;
+const mockFetch: jest.MockedFunction<typeof fetch> = fetch as never;
 
 const jsonType = "application/json";
 const defaultResponseHeaders = { "Content-Type": jsonType };
@@ -18,7 +18,7 @@ describe("API Core", () => {
   const authHeader =
     "Basic " + Buffer.from(user + ":" + apiKey).toString("base64");
 
-  let api = new TestRail(host, user, apiKey, baseUrl);
+  const api = new TestRail(host, user, apiKey, baseUrl);
 
   beforeEach(() => {
     mockFetch.mockClear();

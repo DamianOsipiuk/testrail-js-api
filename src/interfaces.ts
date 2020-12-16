@@ -12,7 +12,7 @@ export const enum RequestType {
 
 export interface RequestOptions {
   requestType?: RequestType;
-  headers?: { [key: string]: any };
+  headers?: Record<string, string>;
   queryVariables?: ParsedUrlQueryInput;
 }
 
@@ -91,10 +91,10 @@ export interface CaseChange {
   old_text: string;
   new_text: string;
   label: string;
-  options: any[];
+  options: unknown[];
   field: string;
-  old_value: any;
-  new_value: any;
+  old_value: unknown;
+  new_value: unknown;
 }
 
 export interface CaseHistory {
@@ -119,7 +119,7 @@ export interface AddCase {
   milestone_id?: number;
   refs?: string;
   custom_step_results?: CaseStep[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 //#endregion
 
@@ -393,7 +393,7 @@ export interface Result {
   test_id: number;
   version: string;
   custom_step_results?: ResultStep[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface ResultStep {
@@ -411,7 +411,7 @@ export interface AddResult {
   defects?: string;
   assignedto_id?: number;
   custom_step_results?: ResultStep[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface AddMultipleResult extends AddResult {
@@ -472,7 +472,7 @@ export interface Run {
   untested_count: number;
   url: string;
   refs: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface AddRun {
@@ -569,7 +569,7 @@ export interface Test {
   status_id: number;
   title: string;
   type_id: number;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 //#endregion
 
