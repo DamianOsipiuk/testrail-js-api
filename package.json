@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint tests --ext .js,.ts",
+    "lint": "eslint src tests --ext .js,.ts",
     "test": "jest"
   },
   "repository": {
