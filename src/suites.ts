@@ -27,5 +27,7 @@ export function deleteSuite(
     soft?: 0 | 1;
   }
 ) {
-  return this.apiPost("delete_suite/" + suite_id, undefined, { queryVariables });
+  return this.apiPost("delete_suite/" + suite_id, undefined, {
+    queryVariables,
+  });
 }
