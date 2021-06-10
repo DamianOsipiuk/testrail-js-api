@@ -147,7 +147,7 @@ describe("API Core", () => {
 
     test("expect Blob", async () => {
       const url = "url5";
-      const responseValue = new Blob(["a", "b", "c"]);
+      const responseValue = new Uint8Array(123).buffer;
 
       mockFetch.mockResolvedValueOnce(
         new Response(responseValue, {
@@ -219,7 +219,7 @@ describe("API Core", () => {
 
     test("send and expect Blob", async () => {
       const url = "url13";
-      const requestValue = new Blob(["a", "b", "c"]);
+      const requestValue = new Uint8Array(123).buffer;
 
       mockFetch.mockResolvedValueOnce(
         new Response(requestValue, {
