@@ -12,8 +12,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint ./src/** ./tests/**",
-    "prepare": "npm run build",
+    "lint": "eslint tests --ext .js,.ts",
     "test": "jest"
   },
   "repository": {
