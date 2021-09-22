@@ -1,5 +1,7 @@
 import type { TestRail } from "./api";
 import type {
+  BulkFilters,
+  BulkResult,
   Plan,
   AddPlan,
   PlanEntry,
@@ -15,17 +17,15 @@ export function getPlan(this: TestRail, plan_id: number) {
 export function getPlans(
   this: TestRail,
   project_id: number,
-  filters?: {
+  filters?: BulkFilters & {
     created_after?: number;
     created_before?: number;
     created_by?: number[];
     is_completed?: 0 | 1;
-    limit?: number;
-    offset?: number;
     milestone_id?: number[];
   }
 ) {
-  return this.apiGet<Plan[]>("get_plans/" + project_id, {
+  return this.apiGet<BulkResult<Plan, "plans">>("get_plans/" + project_id, {
     queryVariables: filters,
   });
 }

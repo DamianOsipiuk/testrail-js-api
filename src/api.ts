@@ -2,9 +2,11 @@ import qs from "querystring";
 import fetch, { Response } from "node-fetch";
 
 import {
+  addAttachmentToCase,
   addAttachmentToPlan,
   addAttachmentToPlanEntry,
   addAttachmentToResult,
+  addAttachmentToRun,
   delete_attachment,
   get_attachment,
   get_attachments_for_case,
@@ -15,11 +17,13 @@ import {
 } from "./attachments";
 import {
   addCase,
+  copyCasesToSection,
   deleteCase,
   deleteCases,
   getCase,
   getCases,
   getHistoryForCase,
+  moveCasesToSection,
   updateCase,
   updateCases,
 } from "./cases";
@@ -213,9 +217,11 @@ export class TestRail {
   //#endregion
 
   //#region Attachments
+  addAttachmentToCase = addAttachmentToCase;
   addAttachmentToPlan = addAttachmentToPlan;
   addAttachmentToPlanEntry = addAttachmentToPlanEntry;
   addAttachmentToResult = addAttachmentToResult;
+  addAttachmentToRun = addAttachmentToRun;
   get_attachments_for_case = get_attachments_for_case;
   get_attachments_for_plan = get_attachments_for_plan;
   get_attachments_for_plan_entry = get_attachments_for_plan_entry;
@@ -230,8 +236,10 @@ export class TestRail {
   getCases = getCases;
   getHistoryForCase = getHistoryForCase;
   addCase = addCase;
+  copyCasesToSection = copyCasesToSection;
   updateCase = updateCase;
   updateCases = updateCases;
+  moveCasesToSection = moveCasesToSection;
   deleteCase = deleteCase;
   deleteCases = deleteCases;
   //#endregion

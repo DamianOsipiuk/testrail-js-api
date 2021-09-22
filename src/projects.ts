@@ -1,5 +1,11 @@
 import type { TestRail } from "./api";
-import type { Project, AddProject, UpdateProject } from "./interfaces";
+import type {
+  BulkFilters,
+  BulkResult,
+  Project,
+  AddProject,
+  UpdateProject,
+} from "./interfaces";
 
 export function getProject(this: TestRail, project_id: number) {
   return this.apiGet<Project>("get_project/" + project_id);
@@ -7,9 +13,11 @@ export function getProject(this: TestRail, project_id: number) {
 
 export function getProjects(
   this: TestRail,
-  filters?: { is_completed?: 0 | 1 }
+  filters?: BulkFilters & { is_completed?: 0 | 1 }
 ) {
-  return this.apiGet<Project[]>("get_projects", { queryVariables: filters });
+  return this.apiGet<BulkResult<Project, "projects">>("get_projects", {
+    queryVariables: filters,
+  });
 }
 
 export function addProject(this: TestRail, data: AddProject) {

@@ -1,5 +1,7 @@
 import type { TestRail } from "./api";
 import type {
+  BulkFilters,
+  BulkResult,
   Result,
   AddResult,
   AddResultForCase,
@@ -9,14 +11,12 @@ import type {
 export function getResults(
   this: TestRail,
   test_id: number,
-  filters?: {
+  filters?: BulkFilters & {
     defects_filter?: string;
-    limit?: number;
-    offset?: number;
     status_id?: number[];
   }
 ) {
-  return this.apiGet<Result[]>("get_results/" + test_id, {
+  return this.apiGet<BulkResult<Result, "results">>("get_results/" + test_id, {
     queryVariables: filters,
   });
 }
@@ -25,14 +25,12 @@ export function getResultsForCase(
   this: TestRail,
   run_id: number,
   case_id: number,
-  filters?: {
+  filters?: BulkFilters & {
     defects_filter?: string;
-    limit?: number;
-    offset?: number;
     status_id?: number[];
   }
 ) {
-  return this.apiGet<Result[]>(
+  return this.apiGet<BulkResult<Result, "results">>(
     "get_results_for_case/" + run_id + "/" + case_id,
     { queryVariables: filters }
   );
@@ -41,19 +39,20 @@ export function getResultsForCase(
 export function getResultsForRun(
   this: TestRail,
   run_id: number,
-  filters?: {
+  filters?: BulkFilters & {
     created_after?: number;
     created_before?: number;
     created_by?: number[];
     defects_filter?: string;
-    limit?: number;
-    offset?: number;
     status_id?: number[];
   }
 ) {
-  return this.apiGet<Result[]>("get_results_for_run/" + run_id, {
-    queryVariables: filters,
-  });
+  return this.apiGet<BulkResult<Result, "results">>(
+    "get_results_for_run/" + run_id,
+    {
+      queryVariables: filters,
+    }
+  );
 }
 
 export function addResult(this: TestRail, test_id: number, data: AddResult) {

@@ -1,5 +1,11 @@
 import type { TestRail } from "./api";
-import type { Section, AddSection, UpdateSection } from "./interfaces";
+import type {
+  BulkFilters,
+  BulkResult,
+  Section,
+  AddSection,
+  UpdateSection,
+} from "./interfaces";
 
 export function getSection(this: TestRail, section_id: number) {
   return this.apiGet<Section>("get_section/" + section_id);
@@ -8,13 +14,16 @@ export function getSection(this: TestRail, section_id: number) {
 export function getSections(
   this: TestRail,
   project_id: number,
-  filters?: {
+  filters?: BulkFilters & {
     suite_id?: number;
   }
 ) {
-  return this.apiGet<Section[]>("get_sections/" + project_id, {
-    queryVariables: filters,
-  });
+  return this.apiGet<BulkResult<Section, "sections">>(
+    "get_sections/" + project_id,
+    {
+      queryVariables: filters,
+    }
+  );
 }
 
 export function addSection(
@@ -23,6 +32,18 @@ export function addSection(
   data: AddSection
 ) {
   return this.apiPost<Section>("add_section/" + project_id, data);
+}
+
+export function moveSection(
+  this: TestRail,
+  section_id: number,
+  parent_id: number | null,
+  after_id?: number | null
+) {
+  return this.apiPost("move_section/" + section_id, {
+    parent_id,
+    after_id,
+  });
 }
 
 export function updateSection(
