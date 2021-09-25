@@ -1,5 +1,11 @@
 import type { TestRail } from "./api";
-import type { Milestone, AddMilestone, UpdateMilestone } from "./interfaces";
+import type {
+  BulkFilters,
+  BulkResult,
+  Milestone,
+  AddMilestone,
+  UpdateMilestone,
+} from "./interfaces";
 
 export function getMilestone(this: TestRail, milestone_id: number) {
   return this.apiGet<Milestone>("get_milestone/" + milestone_id);
@@ -8,14 +14,17 @@ export function getMilestone(this: TestRail, milestone_id: number) {
 export function getMilestones(
   this: TestRail,
   project_id: number,
-  filters?: {
+  filters?: BulkFilters & {
     is_completed?: 0 | 1;
     is_started?: 0 | 1;
   }
 ) {
-  return this.apiGet<Milestone[]>("get_milestones/" + project_id, {
-    queryVariables: filters,
-  });
+  return this.apiGet<BulkResult<Milestone, "milestones">>(
+    "get_milestones/" + project_id,
+    {
+      queryVariables: filters,
+    }
+  );
 }
 
 export function addMilestone(

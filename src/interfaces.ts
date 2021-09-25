@@ -49,17 +49,31 @@ export interface Context {
   project_ids: null;
 }
 
+export type BulkResult<Type, PropertyName extends string> = {
+  offset: number;
+  limit: number;
+  size: number;
+  _link: {
+    next: string | null;
+    prev: string | null;
+  };
+} & { [P in PropertyName]: Type[] };
+
+export type BulkFilters = {
+  limit?: number;
+  offset?: number;
+};
+
 //#region Attachments
 export interface Attachment {
   id: number;
   name: string;
-  filename: string;
   size: number;
   created_on: number;
   project_id: number;
   case_id: number;
-  test_change_id?: number;
   user_id: number;
+  result_id: number;
 }
 
 export interface AddAttachmentResult {

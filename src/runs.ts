@@ -1,5 +1,11 @@
 import type { TestRail } from "./api";
-import type { Run, AddRun, UpdateRun } from "./interfaces";
+import type {
+  BulkFilters,
+  BulkResult,
+  Run,
+  AddRun,
+  UpdateRun,
+} from "./interfaces";
 
 export function getRun(this: TestRail, run_id: number) {
   return this.apiGet<Run>("get_run/" + run_id);
@@ -8,19 +14,17 @@ export function getRun(this: TestRail, run_id: number) {
 export function getRuns(
   this: TestRail,
   project_id: number,
-  filters?: {
+  filters?: BulkFilters & {
     created_after?: number;
     created_before?: number;
     created_by?: number[];
     is_completed?: 0 | 1;
-    limit?: number;
-    offset?: number;
     milestone_id?: number[];
     refs_filter?: string;
     suite_id?: number[];
   }
 ) {
-  return this.apiGet<Run[]>("get_runs/" + project_id, {
+  return this.apiGet<BulkResult<Run, "runs">>("get_runs/" + project_id, {
     queryVariables: filters,
   });
 }

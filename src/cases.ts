@@ -1,3 +1,4 @@
+import { BulkFilters, BulkResult } from ".";
 import type { TestRail } from "./api";
 import type { Case, AddCase, CaseHistory } from "./interfaces";
 
@@ -27,13 +28,20 @@ export function getCases(
     updated_by?: number[];
   }
 ) {
-  return this.apiGet<Case[]>("get_cases/" + project_id, {
+  return this.apiGet<BulkResult<Case, "cases">>("get_cases/" + project_id, {
     queryVariables,
   });
 }
 
-export function getHistoryForCase(this: TestRail, case_id: number) {
-  return this.apiGet<CaseHistory>("get_history_for_case/" + case_id);
+export function getHistoryForCase(
+  this: TestRail,
+  case_id: number,
+  queryVariables?: BulkFilters
+) {
+  return this.apiGet<BulkResult<CaseHistory, "history">>(
+    "get_history_for_case/" + case_id,
+    { queryVariables }
+  );
 }
 
 export function addCase(
@@ -42,6 +50,16 @@ export function addCase(
   case_data: AddCase
 ) {
   return this.apiPost<Case>("add_case/" + section_id, case_data);
+}
+
+export function copyCasesToSection(
+  this: TestRail,
+  section_id: number,
+  case_ids: number[]
+) {
+  return this.apiPost("copy_cases_to_section/" + section_id, {
+    case_ids,
+  });
 }
 
 export function updateCase(
@@ -62,6 +80,16 @@ export function updateCases(
 ) {
   return this.apiPost<Case>("update_cases/" + project_id, case_data, {
     queryVariables,
+  });
+}
+
+export function moveCasesToSection(
+  this: TestRail,
+  section_id: number,
+  case_ids: number[]
+) {
+  return this.apiPost("move_cases_to_section/" + section_id, {
+    case_ids,
   });
 }
 
