@@ -53,7 +53,7 @@ export type BulkResult<Type, PropertyName extends string> = {
   offset: number;
   limit: number;
   size: number;
-  _link: {
+  _links: {
     next: string | null;
     prev: string | null;
   };
