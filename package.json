@@ -31,7 +31,7 @@
   "homepage": "https://github.com/DamianOsipiuk/testrail-api#readme",
   "dependencies": {
     "form-data": "^3.0.0",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
