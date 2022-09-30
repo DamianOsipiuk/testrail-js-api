@@ -13,7 +13,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint src tests --ext .js,.ts",
-    "test": "jest"
+    "test": "jest",
+    "verify": "npm run build && npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
@@ -30,22 +31,22 @@
   },
   "homepage": "https://github.com/DamianOsipiuk/testrail-api#readme",
   "dependencies": {
-    "form-data": "^3.0.0",
-    "node-fetch": "^2.6.1"
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.9.6",
-    "@types/node-fetch": "^2.5.10",
-    "@typescript-eslint/eslint-plugin": "^4.31.2",
-    "@typescript-eslint/parser": "^4.31.2",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.2.1",
-    "prettier": "^2.4.1",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
-    "typescript": "^4.4.3"
+    "@types/jest": "^29.1.1",
+    "@types/node": "^16.11.62",
+    "@types/node-fetch": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.1.2",
+    "prettier": "^2.7.1",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
   }
 }
